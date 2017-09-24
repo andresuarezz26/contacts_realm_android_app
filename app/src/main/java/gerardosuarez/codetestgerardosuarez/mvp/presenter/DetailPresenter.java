@@ -42,12 +42,19 @@ public class DetailPresenter {
     private void decideIfCreateContact() {
         if (!isFirstTime && !isEditable) {
             currentContact = view.createContactFromViews();
-            currentContact.setId(contactId);
             if (currentContact != null) {
-                repository.updateContact(currentContact);
-                view.showMessage(R.string.created_contact_message);
+                addContactAndShowSuccess();
+            } else {
+                view.showMessage(R.string.fields_not_null);
             }
+
         }
+    }
+
+    private void addContactAndShowSuccess() {
+        currentContact.setId(contactId);
+        repository.updateContact(currentContact);
+        view.showMessage(R.string.created_contact_message);
     }
 
     public void deleteContact() {

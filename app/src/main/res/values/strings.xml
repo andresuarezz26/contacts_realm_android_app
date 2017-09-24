@@ -14,6 +14,7 @@
     <string name="address">Address</string>
     <string name="mail">Email</string>
     <string name="save">Save</string>
-    <string name="created_contact_message">Contacto añadido</string>
+    <string name="created_contact_message">Contact added</string>
     <string name="search_for_contacts">Search Contacts</string>
+    <string name="fields_not_null">Name, Lastname and phone cannot be empty</string>
 </resources>

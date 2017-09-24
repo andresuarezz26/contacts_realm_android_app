@@ -1,8 +1,8 @@
 package gerardosuarez.codetestgerardosuarez.mvp.presenter;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
+import gerardosuarez.codetestgerardosuarez.R;
 import gerardosuarez.codetestgerardosuarez.data.repository.ContactRepository;
 import gerardosuarez.codetestgerardosuarez.model.Contact;
 import gerardosuarez.codetestgerardosuarez.mvp.view.AddContactView;
@@ -21,8 +21,12 @@ public class AddContactPresenter {
 
     public void createNewContact() {
         Contact contact = view.createContactFromViews();
-        repository.createContact(contact);
-        view.finishActivity();
+        if (contact != null) {
+            repository.createContact(contact);
+            view.finishActivity();
+        } else {
+            view.showToast(R.string.fields_not_null);
+        }
     }
 
     public void init() {

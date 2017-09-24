@@ -3,7 +3,6 @@ package gerardosuarez.codetestgerardosuarez.mvp.presenter;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import gerardosuarez.codetestgerardosuarez.data.repository.ContactRepository;
@@ -35,8 +34,10 @@ public class MainPresenter {
     }
 
     public void reloadAdapter() {
-        if (repository.getContacts() != null) {
+        if (!CollectionUtils.isEmpty(repository.getContacts())) {
             view.addAll(repository.getContacts());
+        } else {
+            view.removeAll();
         }
     }
 

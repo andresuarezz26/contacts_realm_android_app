@@ -1,6 +1,7 @@
 package gerardosuarez.codetestgerardosuarez.mvp.view;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +51,7 @@ public class DetailView extends ActivityView<DetailActivity> {
         ButterKnife.bind(this, activity);
     }
 
-    public void setContactData(Contact currentContact) {
+    public void setContactData(@NonNull Contact currentContact) {
         contactName.setText(StringUtils.changeNullByEmptyString(currentContact.getName()));
         contactLastName.setText(StringUtils.changeNullByEmptyString(currentContact.getLastname()));
         textBirthday.setText(StringUtils.changeNullByEmptyString(currentContact.getBirthDate()));
@@ -70,24 +71,33 @@ public class DetailView extends ActivityView<DetailActivity> {
         buttonChangeDate.setEnabled(enabled);
     }
 
-    @NonNull
+    @Nullable
     public Contact createContactFromViews() {
-        Contact contact = new Contact();
-        contact.setName(contactName.getText().toString());
-        contact.setLastname(contactLastName.getText().toString());
-        contact.setBirthDate(textBirthday.getText().toString());
+        Contact contact = null;
+        String contactNameText = contactName.getText().toString();
+        String contactLastNameText = contactLastName.getText().toString();
+        String contactPhonenumber = contactPhone.getText().toString();
+        if (!StringUtils.isEmpty(contactNameText) &&
+                !StringUtils.isEmpty(contactLastNameText) &&
+                !StringUtils.isEmpty(contactPhonenumber)
+                ) {
+            contact = new Contact();
+            contact.setName(contactNameText);
+            contact.setLastname(contactLastNameText);
+            contact.setBirthDate(textBirthday.getText().toString());
 
-        List<String> email = new ArrayList<>();
-        email.add(contactEmail.getText().toString());
-        contact.setEmail(email);
+            List<String> email = new ArrayList<>();
+            email.add(contactEmail.getText().toString());
+            contact.setEmail(email);
 
-        List<String> address = new ArrayList<>();
-        address.add(contactAddress.getText().toString());
-        contact.setAddresses(address);
+            List<String> address = new ArrayList<>();
+            address.add(contactAddress.getText().toString());
+            contact.setAddresses(address);
 
-        List<String> phone = new ArrayList<>();
-        phone.add(contactPhone.getText().toString());
-        contact.setPhoneNumbers(phone);
+            List<String> phone = new ArrayList<>();
+            phone.add(contactPhonenumber);
+            contact.setPhoneNumbers(phone);
+        }
 
         return contact;
     }
@@ -110,14 +120,16 @@ public class DetailView extends ActivityView<DetailActivity> {
     }
 
     public void showMessage(@StringRes int restId) {
-        Toast.makeText(getContext(), restId, Toast.LENGTH_LONG).show();
+        if (getContext() != null) {
+            Toast.makeText(getContext(), restId, Toast.LENGTH_LONG).show();
+        }
     }
 
-    public void setBirthDay(String birthDay) {
+    public void setBirthDay(@NonNull String birthDay) {
         textBirthday.setText(birthDay);
     }
 
-    public void showDatePickerFragment(DisposableObserver<String> observer) {
+    public void showDatePickerFragment(@NonNull DisposableObserver<String> observer) {
         if (getActivity() == null) return;
         DatePickerFragment datePickerFragment = new DatePickerFragment();
         datePickerFragment.subscribeToDialogFragment(observer);
