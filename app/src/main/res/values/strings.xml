@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name" text="app_name">CodeTestgerardosuarez</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="btn_remove_contact_txt">Remove</string>
+    <string name="btn_copy_phone">Copy</string>
+    <string name="edit_date">Edit date</string>
+    <string name="edit">Edit</string>
+    <string name="create_contact">Create</string>
+    <string name="birth_date">Birthday</string>
+    <string name="delete">Delete</string>
+    <string name="contact_name">Name</string>
+    <string name="lastname">Lastname</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="mail">Email</string>
+    <string name="save">Save</string>
+    <string name="created_contact_message">Contacto añadido</string>
+    <string name="search_for_contacts">Search Contacts</string>
+</resources>
